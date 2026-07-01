@@ -40,10 +40,10 @@ client. See the "Reckon and the Critter Stack" appendix in the
 | `subscriptions` | `client.Subscriptions(store)` | live + persistent subscriptions | ✅ M2 |
 | `snapshots` | `client.Snapshots(store)` | per-stream snapshots | ✅ M2 |
 | `dcb` | `client.Dcb(store)` | DCB writes/reads **and CCC payload reads** | ✅ M3 |
-| `schema` | `client.Schema(store)` | schema registration + upcasting | ⏳ M4 |
-| `temporal` | `client.Temporal(store)` | wall-clock / time-travel reads | ⏳ M4 |
-| `admin` | `client.Admin(store)` | scavenge, links, store stats | ⏳ M4 |
-| `stores` | `client.Stores` | cluster topology discovery + watch | ⏳ M4 |
+| `schema` | `client.Schema(store)` | schema registration + upcasting | ✅ M4 |
+| `temporal` | `client.Temporal(store)` | wall-clock / time-travel reads | ✅ M4 |
+| `admin` | `client.Admin(store)` | scavenge, links, store stats | ✅ M4 |
+| `stores` | `client.Stores` | cluster topology discovery + watch | ✅ M4 |
 
 There is no `Ccc` sub-client by design: CCC (Command Context Consistency) is the
 payload-keyed *read* variant of the DCB primitive and reuses DCB's single

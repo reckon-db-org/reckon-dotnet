@@ -24,6 +24,25 @@ internal static class WireMapping
         return wire;
     }
 
+    internal static Gw.RecordedEvent ToWireRecorded(RecordedEvent e)
+    {
+        var wire = new Gw.RecordedEvent
+        {
+            EventId = e.EventId,
+            EventType = e.EventType,
+            StreamId = e.StreamId,
+            Version = e.Version,
+            Data = ByteString.CopyFrom(e.Data.Span),
+            Metadata = ByteString.CopyFrom(e.Metadata.Span),
+            Timestamp = e.Timestamp,
+            EpochUs = e.EpochUs,
+            DataContentType = e.DataContentType,
+            MetadataContentType = e.MetadataContentType,
+        };
+        wire.Tags.AddRange(e.Tags);
+        return wire;
+    }
+
     internal static RecordedEvent ToRecordedEvent(Gw.RecordedEvent e) => new(
         e.EventId,
         e.EventType,

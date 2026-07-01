@@ -1,11 +1,15 @@
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Grpc.Net.Client;
+using Reckon.Admin;
 using Reckon.Dcb;
 using Reckon.Health;
+using Reckon.Schema;
 using Reckon.Snapshots;
+using Reckon.Stores;
 using Reckon.Streams;
 using Reckon.Subscriptions;
+using Reckon.Temporal;
 
 namespace Reckon;
 
@@ -31,6 +35,9 @@ public sealed class ReckonClient : IAsyncDisposable, IDisposable
     /// <summary>Gateway-wide health sub-client (not store-bound).</summary>
     public HealthClient Health => new(_channel);
 
+    /// <summary>Gateway-wide store topology sub-client (not store-bound).</summary>
+    public StoresClient Stores => new(_channel);
+
     /// <summary>Stream append/read/watch sub-client, bound to <paramref name="store"/>.</summary>
     public StreamsClient Streams(string store) => new(_channel, store);
 
@@ -42,6 +49,15 @@ public sealed class ReckonClient : IAsyncDisposable, IDisposable
 
     /// <summary>DCB + CCC consistency sub-client, bound to <paramref name="store"/>.</summary>
     public DcbClient Dcb(string store) => new(_channel, store);
+
+    /// <summary>Schema registration + upcasting sub-client, bound to <paramref name="store"/>.</summary>
+    public SchemaClient Schema(string store) => new(_channel, store);
+
+    /// <summary>Time-based read sub-client, bound to <paramref name="store"/>.</summary>
+    public TemporalClient Temporal(string store) => new(_channel, store);
+
+    /// <summary>Administrative sub-client (stats, scavenge, links), bound to <paramref name="store"/>.</summary>
+    public AdminClient Admin(string store) => new(_channel, store);
 
     /// <summary>
     /// Connect to a gateway endpoint (<c>host:port</c>). Establishes the channel
