@@ -31,6 +31,32 @@ their Wolverine/Marten idioms and back the *store* with ReckonDB through this
 client. See the "Reckon and the Critter Stack" appendix in the
 [Reckon Codex](https://codeberg.org/reckon-db-org/reckon-codex).
 
+## Install
+
+The packages (`Reckon.Client`, `Reckon.Extensions.Hosting`) are published to
+Codeberg's NuGet registry, not nuget.org. Add the source, then reference as
+usual. Reading the public feed needs no credentials.
+
+`nuget.config` (in your solution root):
+
+```xml
+<configuration>
+  <packageSources>
+    <add key="reckon-codeberg"
+         value="https://codeberg.org/api/packages/reckon-db-org/nuget/index.json" />
+  </packageSources>
+</configuration>
+```
+
+```bash
+dotnet add package Reckon.Client
+dotnet add package Reckon.Extensions.Hosting   # optional: DI + hosting glue
+```
+
+CI (Forgejo Actions, self-hosted runner) builds and tests every push and
+publishes both packages to that feed on a `v*` tag. See
+[`.forgejo/workflows/ci.yml`](.forgejo/workflows/ci.yml).
+
 ## Sub-clients
 
 | Sub-client | Accessor | Purpose | Status |
