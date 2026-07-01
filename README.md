@@ -108,6 +108,14 @@ dotnet test                                   # inert without a lab gateway
 RECKON_GATEWAY=beam01.lab:50051 RECKON_INSECURE=1 dotnet test   # live round-trip
 ```
 
+Need a gateway to point at? [`dev-env/`](dev-env/) spins one up locally in one
+command (embedded store `default_store`, gRPC on `localhost:50051`):
+
+```bash
+cd dev-env && ./up.sh
+RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet test
+```
+
 Requires the .NET SDK (repo pins `dotnet 10.0.301` via `.tool-versions`).
 Targets `net8.0`, `net9.0` and `net10.0`.
 

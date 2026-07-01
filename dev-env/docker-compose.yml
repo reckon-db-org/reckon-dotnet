@@ -1,0 +1,33 @@
+# Local reckon-gateway in embedded-store mode for running the reckon-dotnet
+# examples and gated E2E tests against a real store.
+#
+#   cd dev-env && ./up.sh          # start + wait until gRPC is accepting
+#   RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet test
+#   ./down.sh                      # stop (add -v to wipe the data volume)
+#
+# One container = one ReckonDB store served over gRPC (50051, plaintext) and
+# HTTP/REST + admin UI (8080). The store id is `default_store`, matching the
+# SDK's default so tests need only RECKON_GATEWAY + RECKON_INSECURE.
+
+name: reckon-dotnet-dev
+
+services:
+  gateway:
+    image: ghcr.io/reckon-db-org/reckon-gateway:0.17.0
+    container_name: reckon-gateway-dev
+    ports:
+      - "50051:50051"   # gRPC (plaintext)
+      - "8080:8080"     # REST API + admin UI at http://localhost:8080/admin
+    environment:
+      RECKON_GATEWAY_STORE_ENABLED: "true"
+      RECKON_GATEWAY_STORE_ID: default_store
+      RECKON_GATEWAY_LOCAL_CLUSTER_ID: local
+      RECKON_GATEWAY_DATA_DIR: /data
+      # Hide from peers' nodes/0 for a standalone embedded-single gateway.
+      RECKON_GATEWAY_DIST_HIDDEN_FLAG: "-hidden"
+    volumes:
+      - reckon-data:/data
+    restart: unless-stopped
+
+volumes:
+  reckon-data:
