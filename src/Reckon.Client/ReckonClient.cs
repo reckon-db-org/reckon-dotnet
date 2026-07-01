@@ -1,6 +1,7 @@
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Grpc.Net.Client;
+using Reckon.Dcb;
 using Reckon.Health;
 using Reckon.Snapshots;
 using Reckon.Streams;
@@ -38,6 +39,9 @@ public sealed class ReckonClient : IAsyncDisposable, IDisposable
 
     /// <summary>Snapshot sub-client, bound to <paramref name="store"/>.</summary>
     public SnapshotsClient Snapshots(string store) => new(_channel, store);
+
+    /// <summary>DCB + CCC consistency sub-client, bound to <paramref name="store"/>.</summary>
+    public DcbClient Dcb(string store) => new(_channel, store);
 
     /// <summary>
     /// Connect to a gateway endpoint (<c>host:port</c>). Establishes the channel
