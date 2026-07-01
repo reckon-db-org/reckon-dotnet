@@ -11,7 +11,7 @@ cat <<'EOF'
 
 reckon-gateway is up.
   gRPC:     localhost:50051 (plaintext)
-  REST/UI:  http://localhost:8080/admin
+  REST/UI:  http://localhost:18080/admin
 
 Run the examples / tests against it:
   RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet test

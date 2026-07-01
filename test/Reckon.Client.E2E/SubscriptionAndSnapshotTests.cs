@@ -33,7 +33,7 @@ public sealed class SubscriptionAndSnapshotTests
         await using var client = await ReckonClient.ConnectAsync(Gateway, Options, cts.Token);
         var subs = client.Subscriptions(Store);
 
-        var name = $"reckon-dotnet-e2e-{Guid.NewGuid():N}";
+        var name = $"dotnete2e{Guid.NewGuid():N}";
         var id = await subs.CreateAsync(SubscriptionType.EventType, "user_registered_v1", name, cancellationToken: cts.Token);
         Assert.False(string.IsNullOrEmpty(id));
 
@@ -64,11 +64,12 @@ public sealed class SubscriptionAndSnapshotTests
         await using var client = await ReckonClient.ConnectAsync(Gateway, Options, cts.Token);
         var snapshots = client.Snapshots(Store);
 
-        var source = $"reckon-dotnet-e2e-src-{Guid.NewGuid():N}";
-        var stream = $"reckon-dotnet-e2e-{Guid.NewGuid():N}";
+        var source = $"dotnete2esrc{Guid.NewGuid():N}";
+        var stream = $"dotnete2e{Guid.NewGuid():N}";
         var payload = Encoding.UTF8.GetBytes("""{"balance":100}""");
+        var metadata = Encoding.UTF8.GetBytes("{}");
 
-        await snapshots.RecordAsync(source, stream, version: 3, payload, cancellationToken: cts.Token);
+        await snapshots.RecordAsync(source, stream, version: 3, payload, metadata, cts.Token);
         try
         {
             Snapshot snap = await snapshots.ReadAsync(source, stream, version: 3, cts.Token);

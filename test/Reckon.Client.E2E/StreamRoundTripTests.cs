@@ -33,7 +33,8 @@ public sealed class StreamRoundTripTests
         await using var client = await ReckonClient.ConnectAsync(Gateway, Options, cts.Token);
         var streams = client.Streams(Store);
 
-        var streamId = $"reckon-dotnet-e2e-{Guid.NewGuid():N}";
+        // The store validates stream ids as {type}-{id}; use that shape.
+        var streamId = $"user-{Guid.NewGuid():N}";
         var append = await streams.AppendAsync(streamId, StreamState.NoStream, new[]
         {
             new ProposedEvent("user_registered_v1", Encoding.UTF8.GetBytes("""{"name":"Ada"}""")),

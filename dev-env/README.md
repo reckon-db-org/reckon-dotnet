@@ -14,10 +14,10 @@ cd dev-env
 This runs the gateway container and blocks until its gRPC port accepts
 connections. It exposes:
 
-| Port | Protocol |
+| Host port | Protocol |
 |---|---|
 | `50051` | gRPC (plaintext) |
-| `8080` | REST API + admin UI at <http://localhost:8080/admin> |
+| `18080` | REST API + admin UI at <http://localhost:18080/admin> |
 
 The store id is **`default_store`**, matching the SDK default, so clients need
 only two environment variables.
@@ -51,3 +51,11 @@ RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet run --project examples/Q
   does not configure.
 - Data persists in the `reckon-data` named volume across restarts until you run
   `./down.sh -v`.
+- Stream ids are validated by the store as `{type}-{id}` (e.g. `user-7c4b9`); a
+  plain or multi-hyphen id is rejected as `malformed_user_id`.
+- Verified green against gateway `0.16.1`: health, store discovery/stats, and
+  the stream append/read/version round-trip. The snapshot, persistent-
+  subscription, and DCB E2E paths currently hit server-side crashes in `0.16.1`
+  (empty-metadata JSON decode, `subscription_to_proto` clause, DCB emitter
+  timeout) — gateway bugs, not client bugs; those tests stay gated and will pass
+  against a fixed backing.
