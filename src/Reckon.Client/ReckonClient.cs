@@ -2,7 +2,9 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Grpc.Net.Client;
 using Reckon.Health;
+using Reckon.Snapshots;
 using Reckon.Streams;
+using Reckon.Subscriptions;
 
 namespace Reckon;
 
@@ -30,6 +32,12 @@ public sealed class ReckonClient : IAsyncDisposable, IDisposable
 
     /// <summary>Stream append/read/watch sub-client, bound to <paramref name="store"/>.</summary>
     public StreamsClient Streams(string store) => new(_channel, store);
+
+    /// <summary>Live + persistent subscription sub-client, bound to <paramref name="store"/>.</summary>
+    public SubscriptionsClient Subscriptions(string store) => new(_channel, store);
+
+    /// <summary>Snapshot sub-client, bound to <paramref name="store"/>.</summary>
+    public SnapshotsClient Snapshots(string store) => new(_channel, store);
 
     /// <summary>
     /// Connect to a gateway endpoint (<c>host:port</c>). Establishes the channel

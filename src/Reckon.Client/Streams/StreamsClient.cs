@@ -96,7 +96,7 @@ public sealed class StreamsClient
             cancellationToken: cancellationToken);
         await foreach (var e in call.ResponseStream.ReadAllAsync(cancellationToken).ConfigureAwait(false))
         {
-            yield return FromWire(e);
+            yield return WireMapping.ToRecordedEvent(e);
         }
     }
 
@@ -129,7 +129,7 @@ public sealed class StreamsClient
         var list = new List<RecordedEvent>(response.Events.Count);
         foreach (var e in response.Events)
         {
-            list.Add(FromWire(e));
+            list.Add(WireMapping.ToRecordedEvent(e));
         }
         return list;
     }
@@ -151,17 +151,4 @@ public sealed class StreamsClient
         }
         return wire;
     }
-
-    private static RecordedEvent FromWire(Gw.RecordedEvent e) => new(
-        e.EventId,
-        e.EventType,
-        e.StreamId,
-        e.Version,
-        e.Data.Memory,
-        e.Metadata.Memory,
-        e.Tags,
-        e.Timestamp,
-        e.EpochUs,
-        e.DataContentType,
-        e.MetadataContentType);
 }
