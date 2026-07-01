@@ -50,6 +50,40 @@ payload-keyed *read* variant of the DCB primitive and reuses DCB's single
 conditional-append, so it lives on the `Dcb` sub-client — matching the proto
 (`DcbService`), reckon-gater, and reckon-go.
 
+## Dependency injection and hosting
+
+The `Reckon.Extensions.Hosting` package wires the client into a generic host and
+gives you a subscription-driven projection worker: ReckonDB owns the log and
+delivery, your handler owns the read model.
+
+```csharp
+builder.Services.AddReckonClient(o => { o.Address = "gateway:50051"; });
+
+// Drive a projection from a persistent subscription. The handler is resolved
+// from a fresh DI scope per event and acked automatically on success.
+builder.Services.AddReckonSubscription<OrderProjection>(o =>
+{
+    o.Store = "orders";
+    o.Type = SubscriptionType.EventType;
+    o.Selector = "order_placed_v1";
+    o.SubscriptionName = "orders-projection";
+});
+
+// Optional gateway health check:
+builder.Services.AddHealthChecks().AddCheck<ReckonHealthCheck>("reckon");
+```
+
+```csharp
+public sealed class OrderProjection : IReckonEventHandler
+{
+    public Task HandleAsync(SubscriptionEnvelope envelope, CancellationToken ct)
+    {
+        // apply envelope.Event to your read model (Marten doc, EF row, ...)
+        return Task.CompletedTask;
+    }
+}
+```
+
 ## Wire contract
 
 The gRPC contract is [reckon-proto](https://codeberg.org/reckon-db-org/reckon-proto),

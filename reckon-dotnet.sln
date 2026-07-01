@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reckon.Client", "src\Reckon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reckon.Client.E2E", "test\Reckon.Client.E2E\Reckon.Client.E2E.csproj", "{C2626DFB-E5C8-42A6-8707-2E66A71854E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reckon.Extensions.Hosting", "src\Reckon.Extensions.Hosting\Reckon.Extensions.Hosting.csproj", "{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,18 @@ Global
 		{C2626DFB-E5C8-42A6-8707-2E66A71854E4}.Release|x64.Build.0 = Release|Any CPU
 		{C2626DFB-E5C8-42A6-8707-2E66A71854E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{C2626DFB-E5C8-42A6-8707-2E66A71854E4}.Release|x86.Build.0 = Release|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Debug|x64.Build.0 = Debug|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Debug|x86.Build.0 = Debug|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Release|x64.ActiveCfg = Release|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Release|x64.Build.0 = Release|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +64,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E0FA1D40-FB51-4352-A4DC-DD08B989FDAA} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{C2626DFB-E5C8-42A6-8707-2E66A71854E4} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal
