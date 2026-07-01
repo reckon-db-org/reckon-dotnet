@@ -53,9 +53,10 @@ RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet run --project examples/Q
   `./down.sh -v`.
 - Stream ids are validated by the store as `{type}-{id}` (e.g. `user-7c4b9`); a
   plain or multi-hyphen id is rejected as `malformed_user_id`.
-- Verified green against gateway `0.16.1`: health, store discovery/stats, and
-  the stream append/read/version round-trip. The snapshot, persistent-
-  subscription, and DCB E2E paths currently hit server-side crashes in `0.16.1`
-  (empty-metadata JSON decode, `subscription_to_proto` clause, DCB emitter
-  timeout) — gateway bugs, not client bugs; those tests stay gated and will pass
-  against a fixed backing.
+- `0.17.0` fixes the snapshot and persistent-subscription crashes found via
+  this SDK's E2E (empty-metadata JSON decode, `subscription_to_proto` map
+  clause, `reply_remove/{ok,ok}`) plus the reckon-db snapshot round-trip that
+  dropped metadata. Verified green: health, store discovery, stream
+  append/read/version, subscription lifecycle, and snapshot record/read/delete.
+  The DCB append path still times out server-side (a separate reckon-db emitter
+  issue), so that test stays gated.
