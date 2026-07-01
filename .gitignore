@@ -1,0 +1,22 @@
+# .NET build output
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.suo
+
+# Test / coverage
+[Tt]est[Rr]esults/
+coverage*.xml
+*.trx

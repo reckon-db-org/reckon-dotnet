@@ -1,0 +1,3 @@
+[submodule "proto"]
+	path = proto
+	url = git@codeberg.org:reckon-db-org/reckon-proto.git

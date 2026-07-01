@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Reckon.Client</PackageId>
+    <RootNamespace>Reckon</RootNamespace>
+    <AssemblyName>Reckon.Client</AssemblyName>
+    <Description>Idiomatic .NET client for the ReckonDB event store, over gRPC via reckon-gateway. Typed access to streams, subscriptions, snapshots, DCB/CCC, schema, temporal and admin — no Erlang required.</Description>
+    <VersionPrefix>0.1.0</VersionPrefix>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.28.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.66.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.66.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <!--
+    Proto sources come from the reckon-proto submodule pinned at proto/ (repo root).
+    The .proto files live at proto/proto/*.proto inside that submodule, all in
+    package reckon.gateway.v1, so protoc derives the C# namespace Reckon.Gateway.V1.
+    Grpc.Tools generates client stubs at build time into obj/ (never committed).
+  -->
+  <ItemGroup>
+    <Protobuf Include="..\..\proto\proto\*.proto"
+              ProtoRoot="..\..\proto\proto"
+              GrpcServices="Client"
+              Access="Public" />
+  </ItemGroup>
+
+</Project>

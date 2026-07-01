@@ -1,0 +1,25 @@
+<Project>
+
+  <!-- Shared build settings for every project in reckon-dotnet. -->
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- NuGet package metadata (applied to packable projects). -->
+  <PropertyGroup>
+    <Authors>Raf Lefever</Authors>
+    <Company>reckon-db-org</Company>
+    <Product>ReckonDB .NET Client</Product>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://codeberg.org/reckon-db-org/reckon-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://codeberg.org/reckon-db-org/reckon-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>eventsourcing;event-store;grpc;reckondb;cqrs;dcb</PackageTags>
+  </PropertyGroup>
+
+</Project>
