@@ -111,6 +111,19 @@ RECKON_GATEWAY=beam01.lab:50051 RECKON_INSECURE=1 dotnet test   # live round-tri
 Requires the .NET SDK (repo pins `dotnet 10.0.301` via `.tool-versions`).
 Targets `net8.0`, `net9.0` and `net10.0`.
 
+Run the quickstart sample against a lab gateway:
+
+```bash
+RECKON_GATEWAY=beam01.lab:50051 RECKON_INSECURE=1 dotnet run --project examples/QuickStart
+```
+
+Produce the NuGet packages (`Reckon.Client`, `Reckon.Extensions.Hosting`) with
+symbols:
+
+```bash
+dotnet pack -c Release --output artifacts
+```
+
 ## Licence
 
 Apache-2.0. See [LICENSE](LICENSE).

@@ -9,6 +9,7 @@ obj/
 *.nupkg
 *.snupkg
 .nuget/
+artifacts/
 
 # IDE
 .vs/

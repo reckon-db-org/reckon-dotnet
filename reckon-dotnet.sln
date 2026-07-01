@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reckon.Client.E2E", "test\R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reckon.Extensions.Hosting", "src\Reckon.Extensions.Hosting\Reckon.Extensions.Hosting.csproj", "{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{B36A84DF-456D-A817-6EDD-3EC3E7F6E11F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickStart", "examples\QuickStart\QuickStart.csproj", "{138D432B-1114-4686-BAF7-9C1693D1C90B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,18 @@ Global
 		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Release|x64.Build.0 = Release|Any CPU
 		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Release|x86.ActiveCfg = Release|Any CPU
 		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4}.Release|x86.Build.0 = Release|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Debug|x64.Build.0 = Debug|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Debug|x86.Build.0 = Debug|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Release|x64.ActiveCfg = Release|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Release|x64.Build.0 = Release|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Release|x86.ActiveCfg = Release|Any CPU
+		{138D432B-1114-4686-BAF7-9C1693D1C90B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +81,6 @@ Global
 		{E0FA1D40-FB51-4352-A4DC-DD08B989FDAA} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{C2626DFB-E5C8-42A6-8707-2E66A71854E4} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{6884C7D9-C086-4BA2-9AA4-EDA51D04E6F4} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{138D432B-1114-4686-BAF7-9C1693D1C90B} = {B36A84DF-456D-A817-6EDD-3EC3E7F6E11F}
 	EndGlobalSection
 EndGlobal
