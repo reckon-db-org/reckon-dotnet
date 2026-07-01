@@ -2,6 +2,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Grpc.Net.Client;
 using Reckon.Health;
+using Reckon.Streams;
 
 namespace Reckon;
 
@@ -26,6 +27,9 @@ public sealed class ReckonClient : IAsyncDisposable, IDisposable
 
     /// <summary>Gateway-wide health sub-client (not store-bound).</summary>
     public HealthClient Health => new(_channel);
+
+    /// <summary>Stream append/read/watch sub-client, bound to <paramref name="store"/>.</summary>
+    public StreamsClient Streams(string store) => new(_channel, store);
 
     /// <summary>
     /// Connect to a gateway endpoint (<c>host:port</c>). Establishes the channel

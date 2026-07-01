@@ -36,7 +36,7 @@ client. See the "Reckon and the Critter Stack" appendix in the
 | Sub-client | Accessor | Purpose | Status |
 |---|---|---|---|
 | `health` | `client.Health` | gateway / per-store health | ✅ M0 |
-| `streams` | `client.Streams(store)` | append + read events on a stream | ⏳ M1 |
+| `streams` | `client.Streams(store)` | append + read + watch events on a stream | ✅ M1 |
 | `subscriptions` | `client.Subscriptions(store)` | live + persistent subscriptions | ⏳ M2 |
 | `snapshots` | `client.Snapshots(store)` | per-stream snapshots | ⏳ M2 |
 | `dcb` | `client.Dcb(store)` | DCB writes/reads **and CCC payload reads** | ⏳ M3 |
@@ -74,7 +74,8 @@ dotnet test                                   # inert without a lab gateway
 RECKON_GATEWAY=beam01.lab:50051 RECKON_INSECURE=1 dotnet test   # live round-trip
 ```
 
-Requires the .NET 8 or 9 SDK. Targets `net8.0` and `net9.0`.
+Requires the .NET SDK (repo pins `dotnet 10.0.301` via `.tool-versions`).
+Targets `net8.0`, `net9.0` and `net10.0`.
 
 ## Licence
 
