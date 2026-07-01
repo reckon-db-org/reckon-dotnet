@@ -13,9 +13,10 @@ name: reckon-dotnet-dev
 
 services:
   gateway:
-    # 0.17.0 carries the snapshot/subscription crash fixes + reckon_db 5.5.2
-    # snapshot round-trip fix. Use `latest` to always pull newest.
-    image: ghcr.io/reckon-db-org/reckon-gateway:0.17.0
+    # 0.17.1 carries the gateway crash fixes + reckon_db 5.5.3 (snapshot
+    # round-trip, emitter, event-type-summary) + reckon_gater 3.7.2 (DCB
+    # conflict). Use `latest` to always pull newest.
+    image: ghcr.io/reckon-db-org/reckon-gateway:0.17.1
     container_name: reckon-gateway-dev
     ports:
       - "50051:50051"     # gRPC (plaintext)
