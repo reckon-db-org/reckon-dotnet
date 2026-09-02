@@ -1,6 +1,6 @@
 # dev-env
 
-A one-command local [reckon-gateway](https://codeberg.org/reckon-db-org/reckon-gateway)
+A one-command local [reckon-gateway](https://github.com/reckon-db-org/reckon-gateway)
 in embedded-store mode, so the examples and the gated E2E tests can run against
 a real store.
 
