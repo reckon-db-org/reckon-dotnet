@@ -1,0 +1,50 @@
+# Build + test on every push/PR; on a `v*` tag, pack and publish both NuGet
+# packages (Reckon.Client, Reckon.Extensions.Hosting) to nuget.org.
+#
+# Publishing needs the repo Actions secret NUGET_API_KEY (an api key from
+# nuget.org scoped to push these two package ids).
+name: ci
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet restore
+      - run: dotnet build -c Release --no-restore
+      # The SDK ships only the net10 runtime; build covers net8/9/10,
+      # tests run on net10.0.
+      - run: dotnet test -c Release -f net10.0 --no-build
+
+  publish:
+    needs: build-test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet pack -c Release -o artifacts
+      - name: push to nuget.org
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          FEED: https://api.nuget.org/v3/index.json
+        # Reckon.Client sorts before Reckon.Extensions.Hosting, so the dependency
+        # publishes first. --skip-duplicate keeps re-runs idempotent.
+        run: |
+          dotnet nuget push "artifacts/*.nupkg"  --source "$FEED" --api-key "$NUGET_API_KEY" --skip-duplicate
+          dotnet nuget push "artifacts/*.snupkg" --source "$FEED" --api-key "$NUGET_API_KEY" --skip-duplicate

@@ -1,8 +1,8 @@
 # reckon-dotnet
 
-Idiomatic .NET client for the [ReckonDB](https://codeberg.org/reckon-db-org/reckon-db)
+Idiomatic .NET client for the [ReckonDB](https://github.com/reckon-db-org/reckon-db)
 event store, accessed over gRPC via the
-[reckon-gateway](https://codeberg.org/reckon-db-org/reckon-gateway) frontend.
+[reckon-gateway](https://github.com/reckon-db-org/reckon-gateway) frontend.
 
 ```csharp
 await using var client = await ReckonClient.ConnectAsync("gateway.example.org:50051");
@@ -14,7 +14,7 @@ Console.WriteLine($"node={overview.Node} status={overview.Status}");
 
 `reckon-dotnet` is the .NET client for the Reckon event-sourcing stack. It
 speaks gRPC to a running
-[reckon-gateway](https://codeberg.org/reckon-db-org/reckon-gateway), which fronts
+[reckon-gateway](https://github.com/reckon-db-org/reckon-gateway), which fronts
 a ReckonDB event store (embedded in the gateway, or federated across remote
 Erlang clusters). You get typed, idiomatic .NET over the full gateway surface
 without speaking Erlang dist or hand-rolling protobuf.
@@ -24,38 +24,26 @@ The package id is `Reckon.Client`; the root namespace is `Reckon` (so calls read
 gateway endpoint; per-service sub-clients are bound to a store and share that
 connection.
 
-This is a sibling to [reckon-go](https://codeberg.org/reckon-db-org/reckon-go)
+This is a sibling to [reckon-go](https://github.com/reckon-db-org/reckon-go)
 and mirrors its shape 1:1. It does **not** reimplement the
-[evoq](https://codeberg.org/reckon-db-org/evoq) framework layer — .NET teams keep
+[evoq](https://github.com/reckon-db-org/evoq) framework layer — .NET teams keep
 their Wolverine/Marten idioms and back the *store* with ReckonDB through this
 client. See the "Reckon and the Critter Stack" appendix in the
-[Reckon Codex](https://codeberg.org/reckon-db-org/reckon-codex).
+[Reckon Codex](https://github.com/reckon-db-org/reckon-codex).
 
 ## Install
 
 The packages (`Reckon.Client`, `Reckon.Extensions.Hosting`) are published to
-Codeberg's NuGet registry, not nuget.org. Add the source, then reference as
-usual. Reading the public feed needs no credentials.
-
-`nuget.config` (in your solution root):
-
-```xml
-<configuration>
-  <packageSources>
-    <add key="reckon-codeberg"
-         value="https://codeberg.org/api/packages/reckon-db-org/nuget/index.json" />
-  </packageSources>
-</configuration>
-```
+[nuget.org](https://www.nuget.org/packages/Reckon.Client):
 
 ```bash
 dotnet add package Reckon.Client
 dotnet add package Reckon.Extensions.Hosting   # optional: DI + hosting glue
 ```
 
-CI (Forgejo Actions, self-hosted runner) builds and tests every push and
-publishes both packages to that feed on a `v*` tag. See
-[`.forgejo/workflows/ci.yml`](.forgejo/workflows/ci.yml).
+CI (GitHub Actions) builds and tests every push and publishes both packages
+to nuget.org on a `v*` tag. See
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
 ## Sub-clients
 
@@ -112,7 +100,7 @@ public sealed class OrderProjection : IReckonEventHandler
 
 ## Wire contract
 
-The gRPC contract is [reckon-proto](https://codeberg.org/reckon-db-org/reckon-proto),
+The gRPC contract is [reckon-proto](https://github.com/reckon-db-org/reckon-proto),
 vendored here as a git submodule under `proto/`, pinned to a tag. Stubs are
 generated at build time by `Grpc.Tools` into `obj/` (package
 `reckon.gateway.v1` → C# namespace `Reckon.Gateway.V1`); nothing generated is
@@ -121,7 +109,7 @@ committed.
 Clone with submodules:
 
 ```bash
-git clone --recurse-submodules https://codeberg.org/reckon-db-org/reckon-dotnet
+git clone --recurse-submodules https://github.com/reckon-db-org/reckon-dotnet
 # or, after a plain clone:
 git submodule update --init
 ```

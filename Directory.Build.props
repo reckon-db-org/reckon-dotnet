@@ -16,8 +16,8 @@
     <Company>reckon-db-org</Company>
     <Product>ReckonDB .NET Client</Product>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://codeberg.org/reckon-db-org/reckon-dotnet</PackageProjectUrl>
-    <RepositoryUrl>https://codeberg.org/reckon-db-org/reckon-dotnet</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/reckon-db-org/reckon-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/reckon-db-org/reckon-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>eventsourcing;event-store;grpc;reckondb;cqrs;dcb</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
