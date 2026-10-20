@@ -27,8 +27,16 @@ jobs:
       # tests run on net10.0.
       - run: dotnet test -c Release -f net10.0 --no-build
 
+
+  # The release guard. version-root names the directory whose manifest
+  # carries the version this repository publishes; the default is the root.
+  release-guard:
+    name: The release guard
+    uses: macula-io/macula-ci-images/.github/workflows/release-guard.yml@2660ee4ce1c51ce3d2bf14043ebc8a2784065cd9
+    with:
+      version-root: src/Reckon.Client
   publish:
-    needs: build-test
+    needs: [build-test, release-guard]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
