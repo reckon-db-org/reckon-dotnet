@@ -5,6 +5,8 @@ event store, accessed over gRPC via the
 [reckon-gateway](https://github.com/reckon-db-org/reckon-gateway) frontend.
 
 ```csharp
+using Reckon;
+
 await using var client = await ReckonClient.ConnectAsync("gateway.example.org:50051");
 var overview = await client.Health.OverviewAsync();
 Console.WriteLine($"node={overview.Node} status={overview.Status}");
@@ -71,6 +73,8 @@ gives you a subscription-driven projection worker: ReckonDB owns the log and
 delivery, your handler owns the read model.
 
 ```csharp
+using Reckon.Extensions.Hosting;
+
 builder.Services.AddReckonClient(o => { o.Address = "gateway:50051"; });
 
 // Drive a projection from a persistent subscription. The handler is resolved
@@ -88,6 +92,9 @@ builder.Services.AddHealthChecks().AddCheck<ReckonHealthCheck>("reckon");
 ```
 
 ```csharp
+using Reckon.Extensions.Hosting;
+using Reckon.Subscriptions;
+
 public sealed class OrderProjection : IReckonEventHandler
 {
     public Task HandleAsync(SubscriptionEnvelope envelope, CancellationToken ct)
