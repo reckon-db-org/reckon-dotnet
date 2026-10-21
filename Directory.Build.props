@@ -25,6 +25,15 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
+  <!--
+    The structural floor (macula-codebase-checks#9): CA1502's threshold comes
+    from CodeMetricsConfig.txt, and the analyzer reads it only as an
+    AdditionalFiles item. At the root so a new project inherits it.
+  -->
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)CodeMetricsConfig.txt" />
+  </ItemGroup>
+
   <!-- Embed the repo README in packable NuGet packages. -->
   <ItemGroup Condition="'$(IsPackable)' != 'false'">
     <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Visible="false" />
