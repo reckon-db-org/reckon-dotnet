@@ -13,10 +13,10 @@ name: reckon-dotnet-dev
 
 services:
   gateway:
-    # 0.17.1 carries the gateway crash fixes + reckon_db 5.5.3 (snapshot
-    # round-trip, emitter, event-type-summary) + reckon_gater 3.7.2 (DCB
-    # conflict). Use `latest` to always pull newest.
-    image: ghcr.io/reckon-db-org/reckon-gateway:0.17.1
+    # Pinned to a gateway release by digest, so every run gets the same image.
+    # The E2E suite and examples/QuickStart pass against this one. To move up,
+    # take the newest tag from the gateway's releases and its digest.
+    image: ghcr.io/reckon-db-org/reckon-gateway:0.30.2@sha256:68e2e7b0288ba50168d32a723bfcf73b26ea379d727a07209a1f5ebec390db4a
     container_name: reckon-gateway-dev
     ports:
       - "50051:50051"     # gRPC (plaintext)

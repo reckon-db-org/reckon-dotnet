@@ -51,12 +51,11 @@ RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet run --project examples/Q
   does not configure.
 - Data persists in the `reckon-data` named volume across restarts until you run
   `./down.sh -v`.
-- Stream ids are validated by the store as `{type}-{id}` (e.g. `user-7c4b9`); a
-  plain or multi-hyphen id is rejected as `malformed_user_id`.
-- `0.17.0` fixes the snapshot and persistent-subscription crashes found via
-  this SDK's E2E (empty-metadata JSON decode, `subscription_to_proto` map
-  clause, `reply_remove/{ok,ok}`) plus the reckon-db snapshot round-trip that
-  dropped metadata. Verified green: health, store discovery, stream
-  append/read/version, subscription lifecycle, and snapshot record/read/delete.
-  The DCB append path still times out server-side (a separate reckon-db emitter
-  issue), so that test stays gated.
+- Stream ids are validated by the store as `<prefix>-<32 hex>` (e.g.
+  `user-018f6a7b8c9d4e5f60718293a4b5c6d7`); any other shape is rejected as
+  `malformed_user_id`. See
+  [Stream Ids](https://hexdocs.pm/reckon_gater/stream_ids.html).
+- The pinned gateway is 0.30.2. Against it the whole E2E suite passes (health,
+  store discovery, stream append/read/version, subscriptions, snapshots, DCB
+  commit and conflict), and `examples/QuickStart` runs to the end, DCB loop
+  included.
