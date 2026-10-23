@@ -11,7 +11,7 @@ namespace Reckon.Client.E2E;
 /// plaintext lab endpoint.
 ///
 /// <code>
-/// RECKON_GATEWAY=beam01.lab:50051 RECKON_INSECURE=1 dotnet test
+/// RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet test
 /// </code>
 /// </summary>
 public sealed class HealthRoundTripTests

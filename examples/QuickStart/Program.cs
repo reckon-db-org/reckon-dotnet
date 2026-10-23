@@ -5,7 +5,7 @@ using Reckon.Streams;
 
 // QuickStart: connect, append + read a stream, then run a DCB uniqueness loop.
 //
-//   RECKON_GATEWAY=beam01.lab:50051 RECKON_INSECURE=1 dotnet run
+//   RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet run
 //
 // Env:
 //   RECKON_GATEWAY   host:port of a reckon-gateway (required)

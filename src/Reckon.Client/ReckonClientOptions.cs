@@ -12,7 +12,7 @@ namespace Reckon;
 public sealed class ReckonClientOptions
 {
     /// <summary>
-    /// Gateway endpoint as <c>host:port</c> (for example <c>beam01.lab:50051</c>).
+    /// Gateway endpoint as <c>host:port</c> (for example <c>gateway.example.org:50051</c>).
     /// Required when the options object is used through dependency injection;
     /// when calling <see cref="ReckonClient.ConnectAsync(string, ReckonClientOptions?, System.Threading.CancellationToken)"/>
     /// the address argument takes precedence.

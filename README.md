@@ -35,17 +35,28 @@ client. See the "Reckon and the Critter Stack" appendix in the
 
 ## Install
 
-The packages (`Reckon.Client`, `Reckon.Extensions.Hosting`) are published to
-[nuget.org](https://www.nuget.org/packages/Reckon.Client):
+The packages (`Reckon.Client`, `Reckon.Extensions.Hosting`) are not on
+nuget.org yet, so `dotnet add package Reckon.Client` does not find them. Build
+them from source and reference the project, or pack them into a local feed:
 
 ```bash
+git clone --recurse-submodules https://github.com/reckon-db-org/reckon-dotnet
+cd reckon-dotnet
+dotnet pack -c Release --output artifacts
+
+# in your own project:
+dotnet nuget add source /path/to/reckon-dotnet/artifacts --name reckon-local
 dotnet add package Reckon.Client
 dotnet add package Reckon.Extensions.Hosting   # optional: DI + hosting glue
 ```
 
-CI (GitHub Actions) builds and tests every push and publishes both packages
-to nuget.org on a `v*` tag. See
-[`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+Or skip the feed and reference the project directly:
+`dotnet add reference /path/to/reckon-dotnet/src/Reckon.Client/Reckon.Client.csproj`.
+
+CI (GitHub Actions) builds and tests every push. Its `v*` tag job is written
+to publish both packages to nuget.org (see
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml)); until that has run,
+building from source is the way in.
 
 ## Sub-clients
 
@@ -125,8 +136,7 @@ git submodule update --init
 
 ```bash
 dotnet build
-dotnet test                                   # inert without a lab gateway
-RECKON_GATEWAY=beam01.lab:50051 RECKON_INSECURE=1 dotnet test   # live round-trip
+dotnet test                                   # live tests are inert without a gateway
 ```
 
 Need a gateway to point at? [`dev-env/`](dev-env/) spins one up locally in one
@@ -140,10 +150,10 @@ RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet test
 Requires the .NET SDK (repo pins `dotnet 10.0.301` via `.tool-versions`).
 Targets `net8.0`, `net9.0` and `net10.0`.
 
-Run the quickstart sample against a lab gateway:
+Run the quickstart sample against that gateway:
 
 ```bash
-RECKON_GATEWAY=beam01.lab:50051 RECKON_INSECURE=1 dotnet run --project examples/QuickStart
+RECKON_GATEWAY=localhost:50051 RECKON_INSECURE=1 dotnet run --project examples/QuickStart
 ```
 
 Produce the NuGet packages (`Reckon.Client`, `Reckon.Extensions.Hosting`) with
